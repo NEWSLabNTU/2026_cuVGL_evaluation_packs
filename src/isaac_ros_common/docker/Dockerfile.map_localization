@@ -1,0 +1,9 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+RUN sudo apt-get update
+RUN sudo apt-get install -y ros-humble-isaac-mapping-ros
+RUN sudo apt-get install -y ros-humble-isaac-ros-visual-global-localization
+
+RUN sudo apt-get install direnv
+COPY direnv_bashrc.txt /home/admin/.bashrc

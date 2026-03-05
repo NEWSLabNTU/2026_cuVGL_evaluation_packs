@@ -1,0 +1,57 @@
+/**:
+  ros__parameters:
+    #===Functional Parameters===#
+    # Number of stereo camera pairs
+    num_cameras: 2 # if using one stereo camera, fill 2
+    # Camera IDs for stereo localization (comma-separated)
+    stereo_localizer_cam_ids: "0,1"
+    # Image synchronization tolerance (ms)
+    image_sync_match_threshold_ms: 5.0
+    # Enable image rectification (false if using pre-rectified images)
+    enable_rectify_images: false
+    # Enable continuous localization after initial pose
+    enable_continuous_localization: true
+    # Use initial guess from cuVSLAM (set to false for pure global localization)
+    use_initial_guess: false
+
+    # Required, the directory of cuVGL map files.
+    map_dir: ""
+    # Required, the directory of config files, which should include keypoint_creation_config.pb.txt and localizer_config.pb.txt.
+    config_dir: ""
+    # The directory of model file. This value can be set in config file.
+    model_dir: ""
+
+    # Will be appended by _{i} (i is in range [0, num_cameras-1])
+    input_image_topic_name: "visual_localization/image"
+    input_camera_info_topic_name: "visual_localization/camera_info"
+
+    # Localization precision level (0-2, higher = more accurate but slower)
+    localization_precision_level: 0
+
+    #===Frame Parameters===#
+    map_frame: "map"
+    base_frame: "zedxm_camera_center" # "base_link"
+    # Camera optical frames (must match ZED camera frames)
+    camera_optical_frames: ['zedxm_left_camera_frame_optical', 'zedxm_right_camera_frame_optical']
+
+    #===Message Parameters===#
+    image_buffer_size: 100
+    image_qos_profile: "SENSOR_DATA"
+  
+    #===Output Parameters===#
+    publish_map_to_base_tf: true
+    publish_map_to_base_tf: false
+
+    #===Debug/Visualization Parameters===#
+    # If it is set, will generate debug images to this folder.
+    debug_dir: ""
+    # Optional, the directory that saves the raw images of the map frames.
+    debug_map_raw_dir: ""
+    # Optional, if to publish the rectified images. This flag is used only when enable_rectify_image is true.
+    publish_rectified_images: false
+    # Optional, if to print more verbose ROS logs.
+    verbose_logging: false
+    # Optional, if to initialize glog. Note that glog can be initialized only once per process, otherwise it raises error.
+    init_glog: false
+    # Optional, the verbose level for glog.
+    glog_v: 0

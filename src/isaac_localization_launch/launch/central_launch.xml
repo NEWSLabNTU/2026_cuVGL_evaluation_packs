@@ -1,0 +1,24 @@
+<launch>
+
+    <arg name="start_vgl" default="true" description="Start cuVGL for visualization"/>
+    <arg name="start_vslam" default="false" description="Start cuVSLAM for visualization"/>
+    <arg name="start_rviz" default="false" description="Start RViz for visualization"/>
+
+    <!-- Parameters of the sub launch files -->
+    <arg name="vgl_map_dir" default="" description="Path to the cuVGL map directory"/>
+    <arg name="vslam_map_dir" default="" description="Path to the cuVSLAM map directory"/>
+
+    <!-- cuVGL node -->
+    <include file="$(find-pkg-share isaac_localization_launch)/launch/vgl_node_launch.xml" if="$(var start_vgl)">
+        <arg name="map_dir" value="$(var vgl_map_dir)"/>
+    </include>
+    <!-- cuVSLAM node -->
+    <include file="$(find-pkg-share isaac_localization_launch)/launch/vslam_node_launch.xml" if="$(var start_vslam)">
+        <arg name="load_map_folder_path" value="$(var vslam_map_dir)"/>
+    </include>
+
+    <!-- RViz visualization -->
+    <node pkg="rviz2" exec="rviz2" name="rviz2" if="$(var start_rviz)"
+          args="-d $(find-pkg-share isaac_localization_launch)/rviz/isaac_zedxm.rviz"/>
+
+</launch>

@@ -1,0 +1,6 @@
+stereo_cameras:
+  - name: zedxm
+    left: /zedxm/zed_node/left/gray/rect/image
+    left_camera_info: /zedxm/zed_node/left/gray/rect/camera_info
+    right: /zedxm/zed_node/right/gray/rect/image
+    right_camera_info: /zedxm/zed_node/right/gray/rect/camera_info

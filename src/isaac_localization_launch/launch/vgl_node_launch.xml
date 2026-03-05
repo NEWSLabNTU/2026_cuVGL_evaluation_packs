@@ -1,0 +1,48 @@
+<launch>
+
+    <!-- Command Line Arguments -->
+    <arg name="param_config" default="$(find-pkg-share isaac_localization_launch)/config/zedxm_params.yaml" />
+    <arg name="map_dir" default="" description="Path to the localization map directory"/>
+    <arg name="config_dir" default="$(find-pkg-share isaac_mapping_ros)/configs" description="Path to the localization map directory"/>
+    
+    <!-- Flag to enable/disable optional nodes -->
+    <arg name="enable_point_cloud_filter" default="false" />
+
+    <!-- Composable Node Container -->
+    <node_container pkg="rclcpp_components" exec="component_container_mt" name="visual_localization_container" namespace="">
+        
+        <!-- Visual Global Localization Node -->
+        <composable_node pkg="isaac_ros_visual_global_localization" 
+                         plugin="nvidia::isaac_ros::visual_global_localization::VisualGlobalLocalizationNode" 
+                         name="visual_localization_node">
+            
+            <!-- Load parameters from the config file -->
+            <param from="$(var param_config)"/>
+
+            <!-- Additional parameters from command line arguments -->
+            <param name="map_dir" value="$(var map_dir)"/>
+            <param name="config_dir" value="$(var config_dir)"/>
+
+            <!-- Topic Remapping -->
+            <remap from="visual_localization/image_0" to="/zedxm/zed_node/left/gray/rect/image"/>
+            <remap from="visual_localization/camera_info_0" to="/zedxm/zed_node/left/gray/rect/camera_info"/>
+            <remap from="visual_localization/image_1" to="/zedxm/zed_node/right/gray/rect/image"/>
+            <remap from="visual_localization/camera_info_1" to="/zedxm/zed_node/right/gray/rect/camera_info"/>
+            
+        </composable_node>
+
+        <!-- Optional Point Cloud Filter Node -->
+        <composable_node pkg="isaac_ros_visual_global_localization" 
+                         plugin="nvidia::isaac_ros::visual_global_localization::PointCloudFilterNode" 
+                         name="point_cloud_filter_node"
+                         if="$(var enable_point_cloud_filter)">
+            <param name="target_frame" value="$(var map_frame)"/>
+            
+            <remap from="point_cloud" to="/front_3d_lidar/lidar_points"/>
+            <remap from="filtered_point_cloud" to="/front_3d_lidar/lidar_points_filtered"/>
+            <remap from="pose" to="/visual_localization/pose"/>
+        </composable_node>
+
+    </node_container>
+
+</launch>
