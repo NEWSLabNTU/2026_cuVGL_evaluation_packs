@@ -1,6 +1,6 @@
 /data/
 /output/
-/build/
-/install/
-/log/
+**/build/
+**/install/
+**/log/
 /isaac_ros_assets/
