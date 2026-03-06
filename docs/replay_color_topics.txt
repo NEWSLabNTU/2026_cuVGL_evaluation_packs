@@ -1,0 +1,5 @@
+/zedxm/zed_node/left/color/rect/camera_info
+/zedxm/zed_node/left/color/rect/image
+/zedxm/zed_node/right/color/rect/camera_info
+/zedxm/zed_node/right/color/rect/image
+/tf_static
