@@ -5,9 +5,9 @@ remap_base_frame:
 # End to End cuVSLAM and cuVGL maps creation
 create_map_offline:
     ros2 run isaac_mapping_ros create_map_offline.py \
-        --sensor_data_bag 'data/rosbag2_build_winding_renamed' \
+        --sensor_data_bag 'data/rosbag2_2026_03_04_build_map_renamed' \
         --base_output_folder 'output' \
-        --camera_topic_config 'src/mapping/config/gray_camera_topic_config.yaml'
+        --camera_topic_config 'src/mapping/config/color_camera_topic_config.yaml' \
         --steps_to_run {edex,cuvslam,map_frames,cuvgl}
 ## Some other arguments of create_map_offline.py
 # --steps_to_run {,edex,cuvslam,map_frames,depth,occupancy,cuvgl} [{,edex,cuvslam,map_frames,depth,occupancy,cuvgl} ...]
@@ -20,25 +20,8 @@ create_map_offline:
 # --image_extension IMAGE_EXTENSION
 #                         Determines the image format to save on disk.
 
-# Resume the above cmd, and start with where it failed, that is, ess (hard-coded).
-continue_create_map:
-    ros2 run isaac_mapping_ros create_map_offline.py \
-        --sensor_data_bag 'data/rosbag2_build_winding_renamed' \
-        --base_output_folder 'output' \
-        --camera_topic_config 'src/mapping/color_camera_topic_config.yaml' \
-        --steps_to_run {depth,occupancy,cuvgl} \
-        --map_dir output/2026-02-08_13-39-00_rosbag2_build_winding_renamed
 
-# Skip ess and nvblox (because they will fail) and jump to cuVGL map creation (successed).
-continue_create_cuVGL_map:
-    ros2 run isaac_mapping_ros create_map_offline.py \
-        --sensor_data_bag 'data/rosbag2_build_winding_renamed' \
-        --base_output_folder 'output' \
-        --camera_topic_config 'src/mapping/color_camera_topic_config.yaml' \
-        --steps_to_run cuvgl \
-        --map_dir output/2026-02-08_13-39-00_rosbag2_build_winding_renamed
-
-# # Do not use. The explanations of the last two arguments are missing.
+#===Do not use! The explanations of the last two arguments are missing===#
 # build-map-color:
 #     #!/usr/bin/env bash
 #     ros2 run isaac_mapping_ros rosbag_to_mapping_data \

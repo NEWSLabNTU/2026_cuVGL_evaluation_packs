@@ -12,6 +12,23 @@ This is a workspace based on the [Isaac ROS official Doc](https://nvidia-isaac-r
 - Ros2 version: Humble
 - Isaac Ros version: 3.2
 
+# Project Structure
+
+```
+.
+├── data  # rosbags
+├── docs  # supplymentary text files
+├── download_NGC_assets_for_ess.sh  # script
+├── download_NGC_assets_for_nvblox.sh  # script
+├── output  # artifact
+├── justfile  # common commands used in the local machine
+├── makefile  # common commands used in the container
+└── src
+    ├── isaac_localization_launch  # cuVGL launch package
+    ├── isaac_ros_common  # docker files
+    └── mapping  # maps creation
+```
+
 # Quick Start
 
 ## On local machine
@@ -28,16 +45,23 @@ Enter the dev container
 just docker
 ```
 
+## Map Creation
+
 Create the maps (vslam map and vgl map)
 
 ```bash
+cd src/mapping
 make create_map_offline
 ```
+
+## Test cuVGL
 
 Build/install launch files
 
 ```bash
+cd src/isaac_localization_launch
 make build
+source install/setup.bash
 ```
 
 Remove build artifacts
@@ -48,22 +72,10 @@ make clean
 
 Run cuVGL
 
-
-# Project Structure
-
-```
-.
-├── data  # rosbags
-├── docs  # supplymentary text files
-├── download_NGC_assets_for_ess.sh  # script
-├── download_NGC_assets_for_nvblox.sh  # script
-├── output  # artifact
-├── justfile  # common commands used in the local machine
-├── makefile  # common commands used in the container
-└── src
-    ├── isaac_localization_launch  # cuVGL launch package
-    ├── isaac_ros_common  # docker files
-    └── mapping  # maps creation
+```bash
+make run
+# then open another terminal
+make replay
 ```
 
 # Data

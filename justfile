@@ -1,5 +1,16 @@
+# install just
+# curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
+
+# install tmux
+# sudo apt-get update
+# sudo apt-get install -y tmux
+# echo 'set -g mouse on' >> ~/.tmux.conf
+# tmux kill-server
+# tmux
+
 default:
-    just --list
+	@echo "List of available commands:"
+	@just --list
 
 # Enter the dev container
 docker:
