@@ -8,48 +8,34 @@ clean:
 	rm -rf build install log
 
 # launch cuVGL and cuVSLAM
-launch:
+run:
 	@if [ -n "$$DISPLAY" ]; then \
 		ros2 launch isaac_localization_launch central_launch.xml \
-			vgl_map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvgl_map \
-			vslam_map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvslam_map \
+			vgl_map_dir:=output/2026-03-06_13-28-50_rosbag2_2026_03_04_build_map_renamed/cuvgl_map \
+			vslam_map_dir:=output/2026-03-06_13-28-50_rosbag2_2026_03_04_build_map_renamed/cuvslam_map \
 			start_vgl:=true \
 			start_vslam:=true \
 			start_rviz:=true; \
 	else \
 		ros2 launch isaac_localization_launch central_launch.xml \
-			vgl_map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvgl_map \
-			vslam_map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvslam_map \
+			vgl_map_dir:=output/2026-03-06_13-28-50_rosbag2_2026_03_04_build_map_renamed/cuvgl_map \
+			vslam_map_dir:=output/2026-03-06_13-28-50_rosbag2_2026_03_04_build_map_renamed/cuvslam_map \
 			start_vgl:=true \
 			start_vslam:=true \
 			start_rviz:=false; \
 	fi
 
-# [Deprecated, use central_launch.xml instead] launch cuVGL
-run:
-	@if [ -n "$$DISPLAY" ]; then \
-		ros2 launch isaac_localization_launch vgl_node_launch.xml \
-			map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvgl_map \
-			start_rviz:=true; \
-	else \
-		ros2 launch isaac_localization_launch vgl_node_launch.xml \
-			map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvgl_map \
-			start_rviz:=false; \
-	fi
 
 # The offical launch file that brings up cuVGL
 run_isaac:
 	ros2 launch isaac_ros_visual_global_localization isaac_ros_visual_global_localization_node.launch.py \
-		vgl_map_dir:=end2end_output/2026-02-08_13-39-00_rosbag2_build_winding_renamed/cuvgl_map
+		vgl_map_dir:=output/2026-03-06_13-28-50_rosbag2_2026_03_04_build_map_renamed/cuvgl_map
+
 
 # replay rosbag including the topics cuVGL subscribed
 replay:
-	ros2 bag play data/rosbag2_val_straight/ \
-		--topics $(shell cat docs/replay_topics.txt)
-
-replay_in_sample:
-	ros2 bag play data/rosbag2_build_square/ \
-		--topics $(shell cat docs/replay_topics.txt)
+	ros2 bag play ../../data/rosbag2_2026_03_04_left_79 \
+		--topics $(shell cat ../../docs/replay_color_topics.txt)
 
 record_vgl_result:
 	ros2 bag record $(shell cat docs/record_topics.txt)
