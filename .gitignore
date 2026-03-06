@@ -1,2 +1,6 @@
-data
-output
+/data/
+/output/
+/build/
+/install/
+/log/
+/isaac_ros_assets/
