@@ -1,0 +1,16 @@
+/zedxm/zed_node/left/color/rect/image:
+  reliability: best_effort
+  history: keep_last
+  depth: 1
+/zedxm/zed_node/right/color/rect/image:
+  reliability: best_effort
+  history: keep_last
+  depth: 1
+/zedxm/zed_node/left/color/rect/camera_info:
+  reliability: best_effort
+  history: keep_last
+  depth: 1
+/zedxm/zed_node/right/color/rect/camera_info:
+  reliability: best_effort
+  history: keep_last
+  depth: 1
