@@ -29,6 +29,16 @@ This is a workspace based on the [Isaac ROS official Doc](https://nvidia-isaac-r
     └── mapping  # maps creation
 ```
 
+# Dependencies
+
+## ZED ROS 2 Wrapper
+
+In case you need to use the [frame name remapping script](src/mapping/scripts/remap_frames.py) to fix the base frame name, you will have to install this package:
+
+```bash
+sudo apt install ros-<ros2-distro>-zed-msgs
+```
+
 # Quick Start
 
 ## On local machine

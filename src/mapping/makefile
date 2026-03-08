@@ -1,15 +1,21 @@
+SHELL := /bin/bash
+DATA_DIR := ../../data
+OUTPUT_DIR := ../../output
+
 # Rename zedmx_camera_center to base_link, and store it as a new rosbag
 remap_base_frame:
-    python scripts/remap_frames.py --source-bag rosbag2_build_square --output-bag rosbag2_build_square_renamed
+	python scripts/remap_frames.py \
+		--source-bag $(DATA_DIR)/rosbag2_2026_03_04_build_map \
+		--output-bag $(DATA_DIR)/rosbag2_2026_03_04_build_map_renamed
 
 # End to End cuVSLAM and cuVGL maps creation
 create_map_offline:
-    ros2 run isaac_mapping_ros create_map_offline.py \
-        --sensor_data_bag '../../data/rosbag2_2026_03_04_build_map_renamed' \
-        --base_output_folder '../../output' \
-        --camera_topic_config 'config/color_camera_topic_config.yaml' \
-        --steps_to_run {edex,cuvslam,map_frames,cuvgl}
-## Some other arguments of create_map_offline.py
+	ros2 run isaac_mapping_ros create_map_offline.py \
+		--sensor_data_bag '$(DATA_DIR)/rosbag2_2026_03_04_build_map_renamed' \
+		--base_output_folder '$(OUTPUT_DIR)' \
+		--camera_topic_config 'config/color_camera_topic_config.yaml' \
+		--steps_to_run {edex,cuvslam,map_frames,cuvgl}
+## Arguments of create_map_offline.py
 # --steps_to_run {,edex,cuvslam,map_frames,depth,occupancy,cuvgl} [{,edex,cuvslam,map_frames,depth,occupancy,cuvgl} ...]
 #                         Specify which steps to run.
 # --prebuilt_bow_vocabulary_folder PREBUILT_BOW_VOCABULARY_FOLDER

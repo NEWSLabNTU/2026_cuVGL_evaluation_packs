@@ -7,10 +7,6 @@ from rosidl_runtime_py.utilities import get_message
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Remap frame_ids in a ROS 2 bag file using named parameters.")
     
-    # Optional with default value
-    parser.add_argument("--data-dir", default="../../data/", 
-                        help="The directory where bags are stored (default: ../../data/)")
-    
     # Required parameters (using flags)
     parser.add_argument("--source-bag", required=True, 
                         help="Name of the source bag folder (Required)")
@@ -65,21 +61,17 @@ def remap_bag(input_path, output_path, frame_mapping):
 def main():
     args = parse_arguments()
 
-    # Construct paths
-    input_full_path = os.path.join(args.data_dir, args.source_bag)
-    output_full_path = os.path.join(args.data_dir, args.output_bag)
-
-    print(f"Input path:  {input_full_path}")
-    print(f"Output path: {output_full_path}")
+    print(f"Input path:  {args.source_bag}")
+    print(f"Output path: {args.output_bag}")
 
     # Set frame mapping: {'old_name': 'new_name'}
     frame_mapping = {'zedxm_camera_center': 'base_link'}
 
-    if not os.path.exists(input_full_path):
-        print(f"Error: Source bag not found at {input_full_path}")
+    if not os.path.exists(args.source_bag):
+        print(f"Error: Source bag not found at {args.source_bag}")
         return
 
-    remap_bag(input_full_path, output_full_path, frame_mapping)
+    remap_bag(args.source_bag, args.output_bag, frame_mapping)
     print("Processing complete.")
 
 
