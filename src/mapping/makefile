@@ -5,9 +5,9 @@ remap_base_frame:
 # End to End cuVSLAM and cuVGL maps creation
 create_map_offline:
     ros2 run isaac_mapping_ros create_map_offline.py \
-        --sensor_data_bag 'data/rosbag2_2026_03_04_build_map_renamed' \
-        --base_output_folder 'output' \
-        --camera_topic_config 'src/mapping/config/color_camera_topic_config.yaml' \
+        --sensor_data_bag '../../data/rosbag2_2026_03_04_build_map_renamed' \
+        --base_output_folder '../../output' \
+        --camera_topic_config 'config/color_camera_topic_config.yaml' \
         --steps_to_run {edex,cuvslam,map_frames,cuvgl}
 ## Some other arguments of create_map_offline.py
 # --steps_to_run {,edex,cuvslam,map_frames,depth,occupancy,cuvgl} [{,edex,cuvslam,map_frames,depth,occupancy,cuvgl} ...]
