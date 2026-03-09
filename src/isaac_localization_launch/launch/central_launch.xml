@@ -3,10 +3,14 @@
     <arg name="start_vgl" default="true" description="Start cuVGL for visualization"/>
     <arg name="start_vslam" default="false" description="Start cuVSLAM for visualization"/>
     <arg name="start_rviz" default="false" description="Start RViz for visualization"/>
+    <arg name="start_image_converter" default="true" description="Start image converter for BGRA8->MONO8 conversion"/>
 
     <!-- Parameters of the sub launch files -->
     <arg name="vgl_map_dir" default="" description="Path to the cuVGL map directory"/>
     <arg name="vslam_map_dir" default="" description="Path to the cuVSLAM map directory"/>
+
+    <!-- Image Converter Node (BGRA8 -> MONO8) -->
+    <include file="$(find-pkg-share isaac_localization_launch)/launch/image_converter_launch.xml" if="$(var start_image_converter)"/>
 
     <!-- cuVGL node -->
     <include file="$(find-pkg-share isaac_localization_launch)/launch/vgl_node_launch.xml" if="$(var start_vgl)">

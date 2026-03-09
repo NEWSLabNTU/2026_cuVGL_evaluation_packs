@@ -34,7 +34,7 @@ Visualization Manager:
   Class: ""
   Displays:
     - Alpha: 0.5
-      Cell Size: 0.41999998688697815
+      Cell Size: 1
       Class: rviz_default_plugins/Grid
       Color: 160; 160; 164
       Enabled: true
@@ -48,7 +48,7 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 40
+      Plane Cell Count: 20
       Reference Frame: <Fixed Frame>
       Value: true
     - Class: rviz_default_plugins/TF
@@ -56,37 +56,13 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        map:
-          Value: true
-        odom:
-          Value: true
-        zedxm_camera_center:
-          Value: true
-        zedxm_camera_link:
-          Value: true
-        zedxm_left_camera_frame:
-          Value: true
-        zedxm_left_camera_frame_optical:
-          Value: true
-        zedxm_right_camera_frame:
-          Value: true
-        zedxm_right_camera_frame_optical:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            zedxm_camera_center:
-              zedxm_left_camera_frame:
-                zedxm_left_camera_frame_optical:
-                  {}
-              zedxm_right_camera_frame:
-                zedxm_right_camera_frame_optical:
-                  {}
+        {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Marker
@@ -287,7 +263,7 @@ Visualization Manager:
           Enabled: true
           Name: PG Edges2
           Namespaces:
-            edges: true
+            {}
           Topic:
             Depth: 5
             Durability Policy: Volatile
@@ -300,7 +276,7 @@ Visualization Manager:
           Enabled: true
           Name: PG Edges
           Namespaces:
-            edges: true
+            {}
           Topic:
             Depth: 5
             Durability Policy: Volatile
@@ -404,8 +380,7 @@ Visualization Manager:
       Enabled: true
       Name: Velocity
       Namespaces:
-        angular velocity: true
-        linear velocity: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -425,7 +400,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /zedxm/zed_node/left/gray/rect/image
+        Value: /zedxm/zed_node/left/color/rect/image
       Value: true
     - Class: rviz_default_plugins/Image
       Enabled: true
@@ -439,7 +414,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /zedxm/zed_node/right/gray/rect/image
+        Value: /zedxm/zed_node/right/color/rect/image
       Value: true
     - Alpha: 1
       Axes Length: 1
@@ -522,16 +497,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 9.294318199157715
+      Distance: 28.45106315612793
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.369417428970337
-        Y: -3.9787323474884033
-        Z: -0.6851638555526733
+        X: -0.04540790617465973
+        Y: -1.6377758979797363
+        Z: -0.6997398138046265
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false

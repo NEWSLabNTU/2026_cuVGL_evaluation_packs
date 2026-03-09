@@ -1,0 +1,8 @@
+<launch>
+    <!-- Image Converter Node
+         Converts BGRA8 color images to MONO8 grayscale
+         for VSLAM input from rosbag playback
+    -->
+    <node pkg="isaac_localization_launch" exec="image_converter_node" name="image_converter">
+    </node>
+</launch>

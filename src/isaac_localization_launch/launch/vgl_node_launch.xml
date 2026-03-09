@@ -23,11 +23,11 @@
             <param name="map_dir" value="$(var map_dir)"/>
             <param name="config_dir" value="$(var config_dir)"/>
 
-            <!-- Topic Remapping -->
-            <remap from="visual_localization/image_0" to="/zedxm/zed_node/left/gray/rect/image"/>
-            <remap from="visual_localization/camera_info_0" to="/zedxm/zed_node/left/gray/rect/camera_info"/>
-            <remap from="visual_localization/image_1" to="/zedxm/zed_node/right/gray/rect/image"/>
-            <remap from="visual_localization/camera_info_1" to="/zedxm/zed_node/right/gray/rect/camera_info"/>
+            <!-- Topic Remapping - Use grayscale images from converter -->
+            <remap from="visual_localization/image_0" to="/zedxm/gray_converter/left/image_rect_gray"/>
+            <remap from="visual_localization/camera_info_0" to="/zedxm/zed_node/left/color/rect/camera_info"/>
+            <remap from="visual_localization/image_1" to="/zedxm/gray_converter/right/image_rect_gray"/>
+            <remap from="visual_localization/camera_info_1" to="/zedxm/zed_node/right/color/rect/camera_info"/>
             
         </composable_node>
 

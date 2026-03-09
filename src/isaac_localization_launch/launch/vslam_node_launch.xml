@@ -19,11 +19,11 @@
         <param name="camera_optical_frames" value="$(var camera_optical_frames)"/>
         <param name="load_map_folder_path" value="$(var load_map_folder_path)"/>
         
-        <!-- Direct NITROS connection to ZED camera topics for zero-copy GPU transfer -->
-        <remap from="/visual_slam/image_0" to="/zedxm/zed_node/left/gray/rect/image"/>
-        <remap from="/visual_slam/camera_info_0" to="/zedxm/zed_node/left/gray/rect/camera_info"/>
-        <remap from="/visual_slam/image_1" to="/zedxm/zed_node/right/gray/rect/image"/>
-        <remap from="/visual_slam/camera_info_1" to="/zedxm/zed_node/right/gray/rect/camera_info"/>
+        <!-- BGRA8 -> MONO8 conversion via image_converter_node -->
+        <remap from="/visual_slam/image_0" to="/zedxm/gray_converter/left/image_rect_gray"/>
+        <remap from="/visual_slam/camera_info_0" to="/zedxm/zed_node/left/color/rect/camera_info"/>
+        <remap from="/visual_slam/image_1" to="/zedxm/gray_converter/right/image_rect_gray"/>
+        <remap from="/visual_slam/camera_info_1" to="/zedxm/zed_node/right/color/rect/camera_info"/>
         <!-- <remap from="/visual_slam/initial_pose" to="/visual_localization/pose"/> -->
         </composable_node>
 

@@ -7,6 +7,19 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(cv_bridge REQUIRED)
+find_package(OpenCV REQUIRED)
+
+# Build C++ executable
+add_executable(image_converter_node src/image_converter_node.cpp)
+ament_target_dependencies(image_converter_node
+  rclcpp
+  sensor_msgs
+  cv_bridge
+  OpenCV
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -26,6 +39,12 @@ install(DIRECTORY
   config
   rviz
   DESTINATION share/${PROJECT_NAME}
+)
+
+# Install C++ executable
+install(TARGETS
+  image_converter_node
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()
