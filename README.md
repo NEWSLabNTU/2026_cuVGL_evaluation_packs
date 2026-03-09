@@ -22,7 +22,6 @@ This is a workspace based on the [Isaac ROS official Doc](https://nvidia-isaac-r
 ├── download_NGC_assets_for_nvblox.sh  # script
 ├── output  # artifact
 ├── justfile  # common commands used in the local machine
-├── makefile  # common commands used in the container
 └── src
     ├── isaac_localization_launch  # cuVGL launch package
     ├── isaac_ros_common  # docker files
@@ -100,3 +99,8 @@ To download: `just download-data`
 - 7 rosbags for testing
     - left/bottom stand for the starting line
     - the numbers show the offset in cm along the starting line from the bottom-left corner 
+
+# Notes
+
+- cuVSLAM should receive images of type mono8, rgb8, while bgra8 is not accepted.
+- cuVGL can read mono8, rgb8, and bgra8.
