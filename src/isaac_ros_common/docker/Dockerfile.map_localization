@@ -1,9 +1,19 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-RUN sudo apt-get update
-RUN sudo apt-get install -y ros-humble-isaac-mapping-ros
-RUN sudo apt-get install -y ros-humble-isaac-ros-visual-global-localization
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    ros-humble-isaac-mapping-ros \
+    ros-humble-isaac-ros-peoplesemseg-models-install \
+    ros-humble-isaac-ros-ess-models-install \
+    ros-humble-isaac-ros-visual-global-localization \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN bash -c "source /opt/ros/humble/setup.bash && \
+    ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula && \
+    ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_vanilla.sh --eula && \
+    ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_shuffleseg.sh --eula"
 
 RUN sudo apt-get install direnv
 COPY direnv_bashrc.txt /home/admin/.bashrc
