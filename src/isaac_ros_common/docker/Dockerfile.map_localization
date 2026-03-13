@@ -1,6 +1,8 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
+ENV ISAAC_ROS_WS=/workspaces/isaac_ros-dev
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -11,9 +13,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN bash -c "source /opt/ros/humble/setup.bash && \
-    ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula && \
-    ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_vanilla.sh --eula && \
-    ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_shuffleseg.sh --eula"
+    yes | ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula && \
+    yes | ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_vanilla.sh --eula && \
+    yes | ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_shuffleseg.sh --eula"
 
 RUN sudo apt-get install direnv
 COPY direnv_bashrc.txt /home/admin/.bashrc
