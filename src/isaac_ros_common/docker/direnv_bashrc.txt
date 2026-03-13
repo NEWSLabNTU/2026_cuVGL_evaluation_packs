@@ -1,0 +1,3 @@
+eval "$(direnv hook bash)"
+eval "$(direnv allow)"
+eval "$(direnv allow /workspaces/isaac_ros-dev/src/isaac_localization_launch)"
