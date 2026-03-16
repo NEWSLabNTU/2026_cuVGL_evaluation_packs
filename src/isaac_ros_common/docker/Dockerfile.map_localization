@@ -10,12 +10,12 @@ RUN apt-get update && apt-get install -y \
     ros-humble-isaac-ros-peoplesemseg-models-install \
     ros-humble-isaac-ros-ess-models-install \
     ros-humble-isaac-ros-visual-global-localization \
+    direnv \
     && rm -rf /var/lib/apt/lists/*
 
-RUN bash -c "source /opt/ros/humble/setup.bash && \
-    yes | ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula && \
-    yes | ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_vanilla.sh --eula && \
-    yes | ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemseg_shuffleseg.sh --eula"
+COPY setup_models.sh /usr/local/bin/setup_models.sh
+RUN sudo chmod +x /usr/local/bin/setup_models.sh
 
-RUN sudo apt-get install direnv
 COPY direnv_bashrc.txt /home/admin/.bashrc
+
+RUN echo "source /usr/local/bin/setup_models.sh" >> /home/admin/.bashrc
